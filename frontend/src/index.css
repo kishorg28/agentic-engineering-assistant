@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-space-dark text-slate-100 font-sans selection:bg-accent-primary/30 selection:text-white overflow-x-hidden;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-accent-primary/20 rounded-full hover:bg-accent-primary/45 transition-colors;
+}
+
+/* Glowing Radial Backgrounds */
+.bg-glow-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.bg-glow-container::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(ellipse 70% 55% at 15% 5%, rgba(56, 189, 248, 0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 85% 95%, rgba(129, 140, 248, 0.1) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(56, 189, 248, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Dot grid overlay */
+.bg-glow-container::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Custom glassmorphism styles */
+.glass-panel {
+  @apply bg-slate-900/60 border border-white/5 backdrop-blur-xl shadow-2xl;
+}
+
+.glass-card {
+  @apply bg-slate-950/45 border border-white/5 backdrop-blur-md rounded-xl hover:border-accent-primary/20 transition-all duration-200;
+}
+
+.chat-bubble-assistant {
+  @apply bg-slate-900/75 border border-accent-secondary/15 backdrop-blur-md shadow-lg shadow-black/40 relative overflow-hidden;
+}
+
+.chat-bubble-assistant::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, #38bdf8 0%, #818cf8 100%);
+}
+
+.chat-bubble-user {
+  @apply bg-accent-primary/5 border border-accent-primary/10 hover:border-accent-primary/20 transition-colors duration-200;
+}
+
+/* Markdown styling inside chat bubbles */
+.prose-custom {
+  @apply text-slate-200 text-sm leading-relaxed;
+}
+
+.prose-custom h1, .prose-custom h2, .prose-custom h3 {
+  @apply text-white font-bold tracking-tight mb-2 mt-4 first:mt-0;
+}
+
+.prose-custom h1 { @apply text-lg; }
+.prose-custom h2 { @apply text-base; }
+.prose-custom h3 { @apply text-sm; }
+
+.prose-custom p {
+  @apply mb-3 last:mb-0;
+}
+
+.prose-custom ul, .prose-custom ol {
+  @apply pl-5 mb-3 list-disc space-y-1;
+}
+
+.prose-custom ol {
+  @apply list-decimal;
+}
+
+.prose-custom code {
+  @apply font-mono bg-accent-primary/10 text-cyan-300 px-1.5 py-0.5 rounded border border-accent-primary/20 text-xs;
+}
+
+.prose-custom pre {
+  @apply font-mono bg-slate-950/90 border border-white/10 rounded-lg p-3 my-3 overflow-x-auto text-xs text-cyan-100;
+}
+
+.prose-custom pre code {
+  @apply bg-transparent border-none p-0 text-cyan-200;
+}
+
+.prose-custom blockquote {
+  @apply border-l-2 border-accent-primary/40 pl-3 italic text-slate-400 my-2;
+}
+
+.prose-custom a {
+  @apply text-accent-primary hover:underline font-semibold;
+}
