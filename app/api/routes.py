@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
 import os
 import shutil
+import traceback
 from app.models.schemas import QueryRequest, QueryResponse, IngestionResponse
 from app.ingestion.loader import DocumentIngestor
 from app.agents.graph import run_agent
@@ -28,6 +29,7 @@ async def upload_file(file: UploadFile = File(...)):
             num_chunks=len(chunks)
         )
     except Exception as e:
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/query", response_model=QueryResponse)
@@ -44,4 +46,5 @@ async def query_assistant(request: QueryRequest):
             retry_count=result.get("retry_count", 0)
         )
     except Exception as e:
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
