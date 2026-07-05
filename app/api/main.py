@@ -29,6 +29,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def read_root():
+    return {"message": "Agentic Engineering Document Assistant API is running!", "status": "healthy"}
+
 app.include_router(router)
 
 if __name__ == "__main__":
