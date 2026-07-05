@@ -81,11 +81,18 @@ def validate_answer(state: AgentState) -> AgentState:
     context = "\n\n".join([doc.page_content for doc in state["documents"]])
     response = chain.invoke({"context": context, "answer": state["answer"]})
     
-    try:
-        score_str = response.content.strip()
-        score = float(score_str)
-    except ValueError:
-        score = 0.5 # Default fallback
+    import re
+    score_str = response.content.strip()
+    # Find all float or integer numbers in the response
+    matches = re.findall(r"[-+]?\d*\.\d+|\d+", score_str)
+    if matches:
+        try:
+            score = float(matches[0])
+            score = max(0.0, min(1.0, score))
+        except ValueError:
+            score = 0.5
+    else:
+        score = 0.5
         
     if score > 0.8:
         level = "High"
