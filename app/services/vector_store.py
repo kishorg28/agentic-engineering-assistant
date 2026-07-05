@@ -25,7 +25,7 @@ class VectorStoreService:
         self.embeddings = HuggingFaceInferenceAPIEmbeddings(
             api_key=huggingface_token,
             model_name="sentence-transformers/all-MiniLM-L6-v2",
-            api_url="https://router.huggingface.co/hf-inference/pipeline/feature-extraction/sentence-transformers/all-MiniLM-L6-v2"
+            api_url="https://router.huggingface.co/hf-inference/models/sentence-transformers/all-MiniLM-L6-v2/pipeline/feature-extraction"
         )
         
         # Initialize SQLite database
