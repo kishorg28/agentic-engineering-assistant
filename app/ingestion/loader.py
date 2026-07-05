@@ -1,5 +1,4 @@
 import os
-import pandas as pd
 from typing import List, Dict, Any
 from langchain_community.document_loaders import PyPDFLoader, TextLoader, CSVLoader
 from langchain_core.documents import Document
